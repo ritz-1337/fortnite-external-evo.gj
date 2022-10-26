@@ -25,7 +25,7 @@ void Esp::ActorLoop() {
 		if (Debug::PrintPointers) Util::PrintPtr("Player: ", LocalPtrs::Player);
 		if (!LocalPtrs::Player) return;
 
-		LocalPtrs::RootComponent = read<uint64_t>(LocalPtrs::Player + 0x190); //https://fn.dumps.host/?class=APlayerController&member=AcknowledgedPawn
+		LocalPtrs::RootComponent = read<uint64_t>(LocalPtrs::Player + 0x190); //https://fn.dumps.host/?class=AActor&member=RootComponent
 		if (Debug::PrintPointers) Util::PrintPtr("RootComponent: ", LocalPtrs::RootComponent);
 		if (!LocalPtrs::RootComponent) return;
 
