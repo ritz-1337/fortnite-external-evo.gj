@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\render">
+      <UniqueIdentifier>{7af2cf58-e320-402e-b1e6-67c5b4228a8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render">
+      <UniqueIdentifier>{3a4fa782-b8a4-4c9a-a050-5627b2a2f679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{0ba5e184-d4a3-4ba4-a82b-d2cb2d453f7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{3205aaf5-ee2c-4fd2-a965-8e551497a271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\render\ImGui">
+      <UniqueIdentifier>{87f6e68e-f6ec-463d-bfbc-7705463a4141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cheat">
+      <UniqueIdentifier>{1978802e-be99-4be0-ba26-e32922a68414}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cheat\sdk">
+      <UniqueIdentifier>{05046b12-f616-488c-91b9-9c64ec27b998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cheat">
+      <UniqueIdentifier>{80d9dc59-0193-424f-a320-3ae136f96dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cheat\sdk">
+      <UniqueIdentifier>{6945a3ce-99be-49cf-a6df-681c287ca659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cheat\driver">
+      <UniqueIdentifier>{caea6038-893c-40e1-8485-93f0f2e8a050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cheat\driver">
+      <UniqueIdentifier>{8751b31c-f28d-4454-a965-ae4bcd9ffcd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cheat\esp">
+      <UniqueIdentifier>{d3d302bc-9848-45bd-bf5b-96aa657f9a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cheat\esp">
+      <UniqueIdentifier>{a4f4fa57-1587-4075-b9e7-03cbc6c432c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cheat\aimbot">
+      <UniqueIdentifier>{07811045-3e42-4335-86fb-b3bcc8a16724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cheat\aimbot">
+      <UniqueIdentifier>{c141b192-6e50-4b0e-bbc5-082a87fd8aa3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="render\render.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="util\util.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui_demo.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui_draw.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui_impl_dx9.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui_impl_win32.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="render\ImGui\imgui_widgets.cpp">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="cheat\sdk\sdk.cpp">
+      <Filter>Source Files\cheat\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="cheat\driver\driver.cpp">
+      <Filter>Source Files\cheat\driver</Filter>
+    </ClCompile>
+    <ClCompile Include="cheat\esp\esp.cpp">
+      <Filter>Source Files\cheat\esp</Filter>
+    </ClCompile>
+    <ClCompile Include="cheat\aimbot\aimbot.cpp">
+      <Filter>Source Files\cheat\aimbot</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="render\render.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="util\util.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imconfig.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imgui.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imgui_impl_dx9.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imgui_impl_win32.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imgui_internal.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imstb_rectpack.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imstb_textedit.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="render\ImGui\imstb_truetype.h">
+      <Filter>Header Files\render\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\sdk\sdk.h">
+      <Filter>Header Files\cheat\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\driver\driver.h">
+      <Filter>Header Files\cheat\driver</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\driver\driverdefs.h">
+      <Filter>Header Files\cheat\driver</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\esp\esp.h">
+      <Filter>Header Files\cheat\esp</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\aimbot\aimbot.h">
+      <Filter>Header Files\cheat\aimbot</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
