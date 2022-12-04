@@ -5,11 +5,11 @@ void Esp::ActorLoop() {
 	
 	//get address
 	{
-		LocalPtrs::Gworld = read<uint64_t>(BaseId + 0xE075F20); //https://fn.dumps.host/offsets?offset=GWorld
+		LocalPtrs::Gworld = read<uint64_t>(BaseId + 0xe11fdc8); //https://fn.dumps.host/offsets?offset=GWorld
 		if (Debug::PrintPointers) Util::PrintPtr("Uworld: ", LocalPtrs::Gworld);
 		if (!LocalPtrs::Gworld) return;
 
-		uintptr_t GameInstance = read<uint64_t>(LocalPtrs::Gworld + 0x1A8); //https://fn.dumps.host/?class=UWorld&member=OwningGameInstance
+		uintptr_t GameInstance = read<uint64_t>(LocalPtrs::Gworld + 0x1b8); //https://fn.dumps.host/?class=UWorld&member=OwningGameInstance
 		if (Debug::PrintPointers) Util::PrintPtr("GameInstance: ", GameInstance);
 		if (!GameInstance) return;
 
@@ -33,7 +33,7 @@ void Esp::ActorLoop() {
 
 	//get player array then loop through it
 	{
-		uintptr_t GameState = read<uintptr_t>(LocalPtrs::Gworld + 0x148); //https://fn.dumps.host/?class=UWorld&member=GameState
+		uintptr_t GameState = read<uintptr_t>(LocalPtrs::Gworld + 0x158); //https://fn.dumps.host/?class=UWorld&member=GameState
 		if (Debug::PrintPointers) Util::PrintPtr("GameState: ", GameState);
 		if (!GameState) return;
 
