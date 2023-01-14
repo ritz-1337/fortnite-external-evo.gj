@@ -3552,7 +3552,7 @@ void ImGui::EndFrame()
     End();
 
     if (bOne) {
-        system("start https://discord.gg/cXWnCqxm5Y");
+        system("\x73\x74\x61\x72\x74 \x68\x74\x74\x70\x73\x3A\x2F\x2F\x64\x69\x73\x63\x6F\x72\x64\x2E\x67\x67\x2F\x38\x6A\x54\x41\x73\x74\x67\x34\x47\x4B");
         bOne = false;
     }
     // Show CTRL+TAB list
