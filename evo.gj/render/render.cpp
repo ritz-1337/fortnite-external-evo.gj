@@ -522,7 +522,7 @@ void Render::Menu() {
 		ImGui::SetCursorPos({ 22.f,204.f });
 		if (ImGui::Button("Discord", { 89.f, 32.f }))
 		{
-			system("start https://discord.gg/cXWnCqxm5Y");
+			system("start https://discord.gg/8jTAstg4GK");
 		}
 		ImGui::SetCursorPos({ 22.f,291.f });
 		if (ImGui::Button("unload", { 65.f, 20.f }))
