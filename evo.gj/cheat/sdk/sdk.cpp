@@ -3,12 +3,9 @@
 Vector3 SDK::GetBoneWithRotation(uintptr_t mesh, int id)
 {
 	uintptr_t bonearray = 0;
-	while (!bonearray) {
-		bonearray = read<uintptr_t>(mesh + 0x5b0);
-		if (!bonearray) bonearray = read<uintptr_t>(mesh + 0x5b0 + 0x10);
-	}
+	bonearray = read<uintptr_t>(mesh + 0x5c0);
+	if (!bonearray) bonearray = read<uintptr_t>(mesh + 0x5c0 + 0x10);
 	
-
 	FTransform ComponentToWorld = read<FTransform>(mesh + 0x240);
 
 	FTransform bone = read<FTransform>(bonearray + (id * 0x60));
@@ -22,22 +19,16 @@ Vector3 SDK::GetBoneWithRotation(uintptr_t mesh, int id)
 Camera SDK::GetViewAngles()
 {
 	Camera LocalCamera;
-
-//Head3D: -82885, 223157, 501.294
-//Head2D : -3752.36, 362.859
-//ViewMatrixCorrect : 2948175702752
-//Location : -75718.7, 223205, 662.159
-//Rotation : -0.244803, -103.383, 0
-//Fov : 79.8823, 69
 	
-	uint64_t CHAIN6969696969696969 = read<uint64_t>(LocalPtrs::Gworld + 0x100);
+	uint64_t CHAIN6969696969696969 = read<uint64_t>(LocalPtrs::Gworld + 0x110);
 	LocalCamera.Location = read<Vector3>(CHAIN6969696969696969);
 
 	uint64_t ViewMatrix = read<uint64_t>(LocalPtrs::LocalPlayers + 0xd0);
-	uint64_t ViewMatrixCorrect = read<uint64_t>(ViewMatrix + 0x10);
+	uint64_t ViewMatrixCorrect = read<uint64_t>(ViewMatrix + 0x8);
 	if (Debug::PrintPointers) Util::PrintPtr("ViewMatrixCorrect: ", ViewMatrixCorrect);
-	LocalCamera.FieldOfView = 80.f / (read<double>(ViewMatrixCorrect + 0x600) / 1.19f);
-	LocalCamera.Rotation.x = read<double>(ViewMatrixCorrect + 0x7D0);
+	LocalCamera.FieldOfView = 80.f / (read<double>(ViewMatrixCorrect + 0x7F0) / 1.19f);
+
+	LocalCamera.Rotation.x = read<double>(ViewMatrixCorrect + 0x9C0);
 	LocalCamera.Rotation.y = read<double>(LocalPtrs::RootComponent + 0x148);
 	LocalCamera.Rotation.x = (asin(LocalCamera.Rotation.x)) * (180.0 / M_PI);
 
