@@ -3,82 +3,62 @@
 void aimbot() {
 	if (!TargetPawn) return;
 
-	auto mesh = read<uintptr_t>(TargetPawn + 0x310);
+	auto mesh = read<uintptr_t>(TargetPawn + 0x310); //https://fn.dumps.host/?class=ACharacter&member=Mesh
 	if (!mesh) {
 		ClosestDistance = FLT_MAX;
 		TargetPawn = NULL;
+		bIsTargeting = FALSE;
 	}
 	Vector3 Head3D = SDK::GetBoneWithRotation(mesh, 68);
 	Vector2 Head2D = SDK::ProjectWorldToScreen(Head3D);
-
-	auto dx = Head2D.x - (Width / 2);
-	auto dy = Head2D.y - (Height / 2);
-	auto dz = 0;
-	auto dist = sqrtf(dx * dx + dy * dy) / 100.0f;
 	
-	if (dist < FovSize && dist <= ClosestDistance) {
-		
-		if (Head2D.x != 0 || Head2D.y != 0) {
-			
-			if ((Util::GetCrossDistance(Head2D.x, Head2D.y, Width / 2, Height / 2) <= FovSize)) {
-				float x = Head2D.x; float y = Head2D.y;
-				float ScreenCenterX = (Width / 2);
-				float ScreenCenterY = (Height / 2);
-
-				float AimSpeed = Smooth;
-
-				float TargetX = 0;
-				float TargetY = 0;
-
-				if (x != 0)
-				{
-					if (x > ScreenCenterX)
-					{
-						TargetX = -(ScreenCenterX - x);
-						TargetX /= AimSpeed;
-						if (TargetX + ScreenCenterX > ScreenCenterX * 2) TargetX = 0;
-					}
-
-					if (x < ScreenCenterX)
-					{
-						TargetX = x - ScreenCenterX;
-						TargetX /= AimSpeed;
-						if (TargetX + ScreenCenterX < 0) TargetX = 0;
-					}
-				}
-				if (y != 0)
-				{
-					if (y > ScreenCenterY)
-					{
-						TargetY = -(ScreenCenterY - y);
-						TargetY /= AimSpeed;
-						if (TargetY + ScreenCenterY > ScreenCenterY * 2) TargetY = 0;
-					}
-
-					if (y < ScreenCenterY)
-					{
-						TargetY = y - ScreenCenterY;
-						TargetY /= AimSpeed;
-						if (TargetY + ScreenCenterY < 0) TargetY = 0;
-					}
-				}
-
-				mouse_event(MOUSEEVENTF_MOVE, TargetX, TargetY, NULL, NULL);
-
-			}
-			else {
-				bIsTargeting = false;
-			}
-		}
-		else {
-			bIsTargeting = false;
-		}
-	}
-	else {
+	auto distance = Util::GetCrossDistance(Head2D.x, Head2D.y, Width / 2, Height / 2);
+	if (distance > FovSize or Head2D.x == 0 or Head2D.y == 0) {
 		ClosestDistance = FLT_MAX;
 		TargetPawn = NULL;
-		bIsTargeting = false;
+		bIsTargeting = FALSE;
 	}
+
+	float x = Head2D.x; float y = Head2D.y;
+	float AimSpeed = Smooth;
+
+	Vector2 ScreenCenter = { (double)Width / 2 , (double)Height / 2 };
+	Vector2 Target;
+
+	if (x != 0)
+	{
+		if (x > ScreenCenter.x)
+		{
+			Target.x = -(ScreenCenter.x - x);
+			Target.x /= AimSpeed;
+			if (Target.x + ScreenCenter.x > ScreenCenter.x * 2) Target.x = 0;
+		}
+
+		if (x < ScreenCenter.x)
+		{
+			Target.x = x - ScreenCenter.x;
+			Target.x /= AimSpeed;
+			if (Target.x + ScreenCenter.x < 0) Target.x = 0;
+		}
+	}
+	if (y != 0)
+	{
+		if (y > ScreenCenter.y)
+		{
+			Target.y = -(ScreenCenter.y - y);
+			Target.y /= AimSpeed;
+			if (Target.y + ScreenCenter.y > ScreenCenter.y * 2) Target.y = 0;
+		}
+
+		if (y < ScreenCenter.y)
+		{
+			Target.y = y - ScreenCenter.y;
+			Target.y /= AimSpeed;
+			if (Target.y + ScreenCenter.y < 0) Target.y = 0;
+		}
+	}
+
+	mouse_event(MOUSEEVENTF_MOVE, Target.x, Target.y, NULL, NULL);
 
 	
 }
