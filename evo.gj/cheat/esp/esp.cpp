@@ -75,9 +75,7 @@ void Esp::ActorLoop() {
 			if (bCornerBox)
 				Util::DrawCornerBox(Head2D.x - (CornerWidth / 2), Head2D.y, CornerWidth, CornerHeight, IM_COL32(0, 173, 237, 255), 1.5);
 			
-			auto dx = Head2D.x - (Width / 2);
-			auto dy = Head2D.y - (Height / 2);
-			auto dist = sqrtf(dx * dx + dy * dy) / 100.0f;
+			auto dist = Util::GetCrossDistance(Head2D.x, Head2D.y, Width / 2, Height / 2);
 			if (dist < FovSize && dist < ClosestDistance) {
 				ClosestDistance = dist;
 				TargetPawn = Player;
