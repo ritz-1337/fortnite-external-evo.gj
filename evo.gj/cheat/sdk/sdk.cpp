@@ -2,54 +2,51 @@
 
 Vector3 SDK::GetBoneWithRotation(uintptr_t mesh, int id)
 {
-	uintptr_t bonearray = 0;
-	bonearray = read<uintptr_t>(mesh + 0x5c0);
-	if (!bonearray) bonearray = read<uintptr_t>(mesh + 0x5c0 + 0x10);
+	int IsCached = read<int>(mesh + 0x648);
+	auto BoneTransform = read<FTransform>(read<uintptr_t>(mesh + 0x10 * IsCached + 0x600) + 0x60 * id);
 	
 	FTransform ComponentToWorld = read<FTransform>(mesh + 0x240);
 
-	FTransform bone = read<FTransform>(bonearray + (id * 0x60));
-
 	D3DMATRIX Matrix;
-	Matrix = MatrixMultiplication(bone.ToMatrixWithScale(), ComponentToWorld.ToMatrixWithScale());
+	Matrix = MatrixMultiplication(BoneTransform.ToMatrixWithScale(), ComponentToWorld.ToMatrixWithScale());
 
 	return Vector3(Matrix._41, Matrix._42, Matrix._43);
 }
-
-Camera SDK::GetViewAngles()
+struct CamewaDescwipsion
 {
-	Camera LocalCamera;
-	
-	uint64_t CHAIN6969696969696969 = read<uint64_t>(LocalPtrs::Gworld + 0x110);
-	LocalCamera.Location = read<Vector3>(CHAIN6969696969696969);
+	Vector3 Location;
+	Vector3 Rotation;
+	float FieldOfView;
+	char Useless[0x18];
+};
+Camera SDK::GetViewAngles() {
+	char v1; // r8
+	CamewaDescwipsion ViewPoint = read<CamewaDescwipsion>(BaseId + 0xE9AD420);
+	BYTE* v2 = (BYTE*)&ViewPoint;
+	int i; // edx
+	__int64 result; // rax
 
-	uint64_t ViewMatrix = read<uint64_t>(LocalPtrs::LocalPlayers + 0xd0);
-	uint64_t ViewMatrixCorrect = read<uint64_t>(ViewMatrix + 0x8);
-	if (Debug::PrintPointers) Util::PrintPtr("ViewMatrixCorrect: ", ViewMatrixCorrect);
-	LocalCamera.FieldOfView = 80.f / (read<double>(ViewMatrixCorrect + 0x7F0) / 1.19f);
-
-	LocalCamera.Rotation.x = read<double>(ViewMatrixCorrect + 0x9C0);
-	LocalCamera.Rotation.y = read<double>(LocalPtrs::RootComponent + 0x148);
-	LocalCamera.Rotation.x = (asin(LocalCamera.Rotation.x)) * (180.0 / M_PI);
-
-	if (LocalCamera.Rotation.y < 0)
-		LocalCamera.Rotation.y = 360 + LocalCamera.Rotation.y;
-
-	if (Debug::PrintLocations) {
-		Util::Print3D("Location: ", LocalCamera.Location);
-		Util::Print3D("Rotation: ", LocalCamera.Rotation);
-		Util::Print2D("Fov: ", Vector2(LocalCamera.FieldOfView, 69));
+	v1 = 0x40;
+	for (i = 0; i < 0x40; ++i)
+	{
+		*v2 ^= v1;
+		result = (unsigned int)(i + 0x17);
+		v1 += i + 0x17;
+		v2++;
 	}
-	
 
-
-	return LocalCamera;
+	return { ViewPoint.Location, ViewPoint.Rotation, ViewPoint.FieldOfView };
 }
 
 Vector2 SDK::ProjectWorldToScreen(Vector3 WorldLocation)
 {
 
 	vCamera = SDK::GetViewAngles(); //get ur players newest view angles
+	if (Debug::PrintLocations) {
+		Util::Print3D("Location: ", vCamera.Location);
+		Util::Print3D("Rotation: ", vCamera.Rotation);
+		Util::Print2D("Fov: ", Vector2(vCamera.FieldOfView, 69));
+	}
 
 	D3DMATRIX tempMatrix = Matrix(vCamera.Rotation);
 
