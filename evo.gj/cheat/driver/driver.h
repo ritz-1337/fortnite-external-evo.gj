@@ -54,11 +54,11 @@ public:
 template <typename T>
 T read(uint64_t address) {
 	T buffer{ };
-	driver::read_physical_memory((PVOID)address, &buffer, sizeof(T));
+	driver::read_virtual_memory((PVOID)address, &buffer, sizeof(T));
 	return buffer;
 }
 
 template<typename T>
 void write(uint64_t address, T buffer) {
-	driver::read_physical_memory((PVOID)address, &buffer, sizeof(T));
+	driver::read_virtual_memory((PVOID)address, &buffer, sizeof(T));
 }
