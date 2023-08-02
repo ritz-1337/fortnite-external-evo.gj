@@ -5,7 +5,7 @@ void Esp::ActorLoop() {
 	
 	//get address
 	{
-		LocalPtrs::Gworld = read<uint64_t>(BaseId + 0xEA84A78); //https://fn.dumps.host/offsets?offset=GWorld
+		LocalPtrs::Gworld = read<uint64_t>(BaseId + 0xEE2F8E8); //https://fn.dumps.host/offsets?offset=GWorld
 		if (Debug::PrintPointers) Util::PrintPtr("Uworld: ", LocalPtrs::Gworld);
 		if (!LocalPtrs::Gworld) return;
 
@@ -51,7 +51,7 @@ void Esp::ActorLoop() {
 			if (!PlayerState) continue; // we say if the pointer is invalid to continue, this means it will continue onto the next loop
 
 			//since we only have the player state, we use PawnPrivate to get to the player
-			uintptr_t Player = read<uintptr_t>(PlayerState + 0x300); //https://fn.dumps.host/?class=APlayerState&member=PawnPrivate
+			uintptr_t Player = read<uintptr_t>(PlayerState + 0x308); //https://fn.dumps.host/?class=APlayerState&member=PawnPrivate
 			if (Debug::PrintPointers) Util::PrintPtr("Enemy Player: ", Player);
 			if (!Player) continue;
 			if (Player == LocalPtrs::Player) continue; //if this current player we are looping through equals our local player then continue, so we dont draw esp on ourselves
